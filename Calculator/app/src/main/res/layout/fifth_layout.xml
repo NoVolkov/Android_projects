@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="What is Lorem Ipsum?"
+                android:textSize="34sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Практическое занятие будет проходить также, как и в очном формате. Рассказываем свои доклады. Подготовиться всем!!! Также всем студентам в компьютеры или другие гаджеты загрузить хрестоматию по философии. Её еще раз прикрепляю в письме, если у кого то её еще нет. Все занятия проверяются! Поэтому все, без исключения, строго по расписанию подключаются! Всё занятие находимся он-лайн. Никто не отключается. Активно работаем.
+Всем отписаться мне, что информация получена и передана другим студентам! Если всё сдано - в день зачёта нужно загрузить все отчёты в ИОС (архивом).
+Если не всё сдано (не успели отчитаться Орлову) - можно решить вопрос на месте (сдать Печёнкину). на экзамене как было, сначала подходишь к файфелю решаешь на лиспе задачу, потом к Ермаку на прологе решаешь, если решил то допускаешься до билетов к Долининой) Lorem Ipsum is simply dummy text of the printing and typesetting industry...like Aldus PageMaker including versions of Lorem Ipsum."
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Why do we use it?"
+                android:textSize="34sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="К каждому тегу с дз приписываем дату занятия, на котором дали дз, и до какого срока нужно его выполнить. Формат записи: дз дата, когда дали дз/сроки выполнения
+ Я попросил Ирину его создать, чтобы здесь я мог оперативно делать какие-то объявления, а вы могли мне задавать вопросы.
+Сюда же буду скидывать ссылки на материалы, видеоконференции, ведомости успеваемости и т.д. Lorem Ipsum is simply dummy text of the printing and typesetting industry...like Aldus PageMaker including versions of Lorem Ipsum."
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="Where can I get some?"
+                android:textSize="34sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Изменилось время нашей предэкзаменационной консультации по философии. Просьба передать всем заинтересованным. Консультация пройдет 21.01.2022 в 11.00 в 1/414. В плане пересечения с военной кафедрой - не уверен. Эта дисцпилина впервые на третьем курсе преподаётся, так что какой у неё статус - не подскажу.
+Судя по учебному плану, это дисциплина по выбору. Т.е. студенты с военной кафедры её не сдают. Но лучше уточните в дирекции, на всякий пожарный случай. There are many variations of passages of Lorem Ipsum available ... or non-characteristic words etc."
+                android:textSize="14sp" />
+        </LinearLayout>
+    </ScrollView>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="711dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="20dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
