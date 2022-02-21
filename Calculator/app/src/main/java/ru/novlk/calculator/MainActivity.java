@@ -3,11 +3,13 @@ package ru.novlk.calculator;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         layout.addView(textView);
         setContentView(layout);*/
         setContentView(R.layout.activity_main);
+
 
         /*View plusBtnView=findViewById(R.id.plus_button);
         View minusBtnView=findViewById(R.id.minus_button);
