@@ -20,7 +20,7 @@ import java.util.Deque;
 
 public class MainActivity extends AppCompatActivity {
     TextView resField;
-
+    private Deque<String> fieldOut=new ArrayDeque<>();
     private boolean isCounted=false;
     private String expression;
     private Deque<BigDecimal> stackOperands=new ArrayDeque<>();
@@ -121,8 +121,8 @@ public class MainActivity extends AppCompatActivity {
 
         resField.setText(stackOperands.pop().toString());
     }
-    public String getOperand(View view){
-        return "";
+    public void addToken(View view){
+
     }
     public String getOperation(View view){
         return "";

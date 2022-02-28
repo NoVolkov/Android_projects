@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Конвертер длины</string>
+    <string name="m_btn_change_lang">Сменить язык</string>
+    <string name="language">Выберете язык</string>
+    <string name="message">Язык был изменён</string>
+
+    <string name="u_meters">метры</string>
+    <string name="u_kilometers">километры</string>
+    <string name="u_centimeters">сантиметры</string>
+    <string name="u_feet">футы</string>
+    <string name="u_miles">мили</string>
+    <string name="u_inches">дюймы</string>
+
+</resources>

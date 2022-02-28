@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--Единицы измерения переведённые в метры-->
+    <!--Units of measurement converted to meters-->
+    <string name="meters" translatable="false">1</string>
+    <string name="kilometers" translatable="false">1000</string>
+    <string name="centimeters" translatable="false">0.01</string>
+    <string name="feet" translatable="false">0.3048</string>
+    <string name="miles" translatable="false">1609.344</string>
+    <string name="inches" translatable="false">0.0254</string>
+</resources>

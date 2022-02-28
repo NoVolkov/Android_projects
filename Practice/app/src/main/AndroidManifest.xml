@@ -9,18 +9,25 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Practice">
-        <activity android:name=".task_1.Starter"
-            android:exported="true"
-            android:screenOrientation="portrait">
+        <activity
+            android:name=".task_1.NameForm"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
 
-        <activity android:name=".task_1.SecondPage"
-            android:exported="true"/>
+        </activity>
+        <activity
+            android:name=".task_1.Starter"
+            android:exported="true"
+            android:screenOrientation="portrait">
+
+        </activity>
+        <activity
+            android:name=".task_1.SecondPage"
+            android:exported="true" />
     </application>
 
 </manifest>
