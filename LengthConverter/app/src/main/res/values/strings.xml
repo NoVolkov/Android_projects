@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Length unit converter</string>
+    <string name="m_btn_change_lang">Change language</string>
+    <string name="language">Choose language</string>
+    <string name="message">Language has been changed</string>
+
+
+    <string name="u_meters">meters</string>
+    <string name="u_kilometers">kilometers</string>
+    <string name="u_centimeters">centimeters</string>
+    <string name="u_feet">feet</string>
+    <string name="u_miles">miles</string>
+    <string name="u_inches">inches</string>
+
+</resources>
