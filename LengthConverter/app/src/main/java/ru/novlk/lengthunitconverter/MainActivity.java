@@ -7,16 +7,19 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.text.Editable;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -26,8 +29,7 @@ import java.util.Map;
 
 public class MainActivity extends AppCompatActivity {
     int[] inUnits;
-    boolean l=true;
-    Map<String,Double> unitsToMeters;
+//    Map<String,Double> unitsToMeters;
 
     Spinner inputList;
     Spinner outputList;
@@ -90,10 +92,25 @@ public class MainActivity extends AppCompatActivity {
                 R.string.u_inches,
                 R.string.u_feet,
                 R.string.u_miles};
-        ArrayAdapter<String> adapter=new ArrayAdapter<>(this, android.R.layout.simple_spinner_item,getStringsLanguages());
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter=new ArrayAdapter<>(this, R.layout.spinner_item,getStringsLanguages());
+        adapter.setDropDownViewResource(R.layout.spinner_dropdown_item);
         inputList.setAdapter(adapter);
         outputList.setAdapter(adapter);
+
+        AdapterView.OnItemSelectedListener itemSelectedListener=new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                String s=input.getText().toString();
+                if(TextUtils.isEmpty(s))s="0";
+                calc(s);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+            }
+        };
+        inputList.setOnItemSelectedListener(itemSelectedListener);
+        outputList.setOnItemSelectedListener(itemSelectedListener);
     }
     private void setListenerForInput(){
         input.addTextChangedListener(new TextWatcher() {
@@ -102,14 +119,16 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                calc(charSequence);
+                String s=charSequence.toString();
+                if(TextUtils.isEmpty(charSequence))s="0";
+                calc(s);
             }
 
             @Override
             public void afterTextChanged(Editable editable) {}
         });
     }
-    private void calc(CharSequence s){
+    private void calc(String s){
         String inUnit=inputList.getSelectedItem().toString();
         String outUnit=outputList.getSelectedItem().toString();
         String s1=getResources().getString(
@@ -118,6 +137,10 @@ public class MainActivity extends AppCompatActivity {
         String s2=getResources().getString(
                 getResources().getIdentifier(getNameUnit(outUnit),"string",getPackageName())
         );
+//        BigDecimal d1=new BigDecimal(s1);
+//        BigDecimal d2=new BigDecimal(s2);
+//        BigDecimal res=new BigDecimal(s).multiply(d1).divide(d2);
+
         Double d1=Double.parseDouble(s1);
         Double d2=Double.parseDouble(s2);
         Double res=Double.parseDouble(s.toString())*d1/d2;
