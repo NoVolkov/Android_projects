@@ -1,102 +1,57 @@
 package ru.novlk.calculator;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.constraintlayout.widget.ConstraintLayout;
 
-import android.content.Context;
-import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.text.TextUtils;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import java.math.BigDecimal;
 import java.util.ArrayDeque;
+import java.util.ArrayList;
 import java.util.Deque;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     TextView resField;
     private Deque<String> fieldOut=new ArrayDeque<>();
+    private List<Button> specFunction=new ArrayList<>();
     private boolean isCounted=false;
     private String expression;
     private Deque<BigDecimal> stackOperands=new ArrayDeque<>();
     private Deque<String> stackOperations=new ArrayDeque<>();
-    private int c=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*ConstraintLayout layout=new ConstraintLayout(this);
-
-        TextView textView=new TextView(this);
-        textView.setText("Hello there");
-        textView.setTextSize(26);
-
-        ConstraintLayout.LayoutParams layoutParams=new ConstraintLayout.LayoutParams(
-          ConstraintLayout.LayoutParams.WRAP_CONTENT,
-          200//ConstraintLayout.LayoutParams.WRAP_CONTENT
-        );
-        layoutParams.rightToRight=ConstraintLayout.LayoutParams.PARENT_ID;
-        layoutParams.topToTop=ConstraintLayout.LayoutParams.PARENT_ID;
-
-        textView.setLayoutParams(layoutParams);
-        layout.addView(textView);
-        setContentView(layout);*/
         setContentView(R.layout.activity_main);
         resField=findViewById(R.id.txt_EntryField);
-
-
-        /*View plusBtnView=findViewById(R.id.plus_button);
-        View minusBtnView=findViewById(R.id.minus_button);
-        TextView clicksText=findViewById(R.id.clicksText);
-
-        Button plusBtn=plusBtnView.findViewById(R.id.clickBtn);
-        Button minusBtn=minusBtnView.findViewById(R.id.clickBtn);
-
-        plusBtn.setText("+");
-        minusBtn.setText("-");
-
-        plusBtn.setOnClickListener(v->{
-            clicks++;
-            clicksText.setText(clicks+"");
-        });
-        minusBtn.setOnClickListener(v->{
-            clicks--;
-            clicksText.setText(clicks+"");
-        });*/
-        /*EditText editText = findViewById(R.id.editText);
-
-        editText.addTextChangedListener(new TextWatcher() {
-
-            public void afterTextChanged(Editable s) {}
-
-            public void beforeTextChanged(CharSequence s, int start,
-                                          int count, int after) {
-            }
-
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                TextView textView = findViewById(R.id.textView);
-                textView.setText(s);
-            }
-        });*/
+        specFunction.add(findViewById(R.id.sqrt));
+        specFunction.add(findViewById(R.id.partOfAWhole));
+        specFunction.add(findViewById(R.id.plusMinus));
+        activateSpecFunctions();
     }
-    public void test(View view){
-        resField.setText(String.valueOf(c++));
-    }
-    public void calc(View view){
+
+    public void btnCalc(View view){
+        if(TextUtils.isEmpty(resField.getText()))return;
         expression=resField.getText().toString().replace(" ","");
         String accNumber="";
         boolean replacementFirstOperand=true;
+        if(expression.substring(0,1).equals("-")){
+            expression="0"+expression;
+        }
         for(String s: expression.split("")){
             if(s.matches("[0-9[.]]")){
                 accNumber+=s;
             }else{
-
-                if(s.matches("[+-[/*]\u221A]")){
-                    if(replacementFirstOperand || getOperandPriority(s)>=getOperandPriority(stackOperations.pop())){//или идти от того, что пустая очередь возвращает null?
+                if(!accNumber.isEmpty()){
+                    stackOperands.push(new BigDecimal(accNumber));
+                    accNumber="";
+                }
+                if(s.matches("[+-[/*]]")){
+                    if(replacementFirstOperand || getOperationPriority(s)> getOperationPriority(stackOperations.getLast())){//или идти от того, что пустая очередь возвращает null?
                         replacementFirstOperand=false;
                     }else{
                         BigDecimal b2=stackOperands.pop();
@@ -107,10 +62,10 @@ public class MainActivity extends AppCompatActivity {
                     stackOperations.push(s);
                 }
             }
-            if(!accNumber.isEmpty()){
-                stackOperands.push(new BigDecimal(accNumber));
-                accNumber="";
-            }
+
+        }
+        if(!accNumber.isEmpty()){
+            stackOperands.push(new BigDecimal(accNumber));
         }
         while (!stackOperations.isEmpty()){
             BigDecimal b2=stackOperands.pop();
@@ -120,20 +75,33 @@ public class MainActivity extends AppCompatActivity {
         }
 
         resField.setText(stackOperands.pop().toString());
+        isCounted=true;
+        activateSpecFunctions();
     }
-    public void addToken(View view){
 
+    public void btnOperandOperation(View view){
+        Button button=(Button) view;
+        if(!TextUtils.isEmpty(resField.getText())){
+            String stringInput=resField.getText().toString();
+            String lastSymbol=stringInput.substring(stringInput.length()-1);
+            if(lastSymbol.matches("[+-[/*]]") && button.getText().toString().matches("[+-[/*]]"))return;
+        }else{
+            if(button.getText().toString().matches("[+-[/*]]")){
+                resField.append("0");
+            }
+        }
+
+        resField.append(button.getText());
+        isCounted=false;
+        activateSpecFunctions();
     }
-    public String getOperation(View view){
-        return "";
-    }
-    private int getOperandPriority(String s){
+    private int getOperationPriority(String s){
         switch (s){
             case "+":
             case "-": return 1;
             case "*":
             case "/": return 2;
-            case "\u221A": return 3;
+            //case "\u221A": return 3;
             default: return 0;
         }
     }
@@ -143,8 +111,40 @@ public class MainActivity extends AppCompatActivity {
             case "/": return d1.divide(d2);
             case "+": return d1.add(d2);
             case "-": return d1.subtract(d2);
-            case "\u221A": return new BigDecimal(Math.sqrt(d1.doubleValue()));
+           // case "\u221A": return new BigDecimal(Math.sqrt(d1.doubleValue()));
             default: return new BigDecimal(0);
+        }
+    }
+    public void btnClearFieldOut(View view){
+        resField.setText("");
+        isCounted=false;
+        activateSpecFunctions();
+        stackOperands.clear();
+    }
+    public void btnSpecFunction(View view){
+        Button button=(Button)view;
+        String res=resField.getText().toString();
+        if(isCounted){
+            switch(button.getText().toString()){
+                case "\u221A": res=String.valueOf(Math.sqrt(Double.parseDouble(res)));break;
+                case "1/x": res=executeOperation("/",new BigDecimal(1),new BigDecimal(res)).toString();break;
+                case "+/-": res=executeOperation("*",new BigDecimal(-1),new BigDecimal(res)).toString();break;
+                default:break;
+            }
+            resField.setText(res);
+        }
+    }
+    public void activateSpecFunctions(){
+        if(isCounted){
+            for(Button b:specFunction){
+                b.setActivated(true);
+                b.setBackgroundColor(getResources().getColor(R.color.btn_active));
+            }
+        }else{
+            for(Button b:specFunction){
+                b.setActivated(false);
+                b.setBackgroundColor(getResources().getColor(R.color.btn_inactive));
+            }
         }
     }
 }
