@@ -5,6 +5,7 @@ import static androidx.core.content.PackageManagerCompat.LOG_TAG;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.media.AudioAttributes;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -12,9 +13,12 @@ import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.IOException;
@@ -106,7 +110,30 @@ public class MainActivity extends AppCompatActivity implements MediaPlayer.OnPre
         soundIdExplosion = sp.load(this,R.raw.explosion,1);
 
     }
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
 
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        Intent intent;
+        switch(id){
+            case R.id.AudioPlay:
+                intent=new Intent(this,MainActivity.class);
+                startActivity(intent);
+                return true;
+            case R.id.AudioRecord:
+                intent=new Intent(this,ActivityRecorder.class);
+                startActivity(intent);
+                return true;
+
+        }
+        //headerView.setText(item.getTitle());
+        return super.onOptionsItemSelected(item);
+    }
     public void onClick(View view) {
         sp.play(soundIdShot, 1, 1, 0, 0, 1);
         sp.play(soundIdExplosion, 1, 1, 0, 0, 1);
