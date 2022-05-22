@@ -2,17 +2,104 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
+    
+    >
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/main_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="1dp"
+        android:background="#29D4EA"
+        >
+        <LinearLayout
+            android:id="@+id/linear_buttons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            >
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginRight="1dp"
+                android:background="@drawable/rectangle_button"
+                android:text="@string/str_all"
+                android:textSize="20sp"
+                android:onClick="onClick_goToListPostIts"
+                />
+            <Button
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginLeft="1dp"
+
+                android:background="@drawable/rectangle_button"
+
+                android:text="@string/str_tags"
+                android:textSize="20sp"
+                android:onClick="onClick_goToListTags"
+
+                />
+        </LinearLayout>
+        <androidx.fragment.app.FragmentContainerView
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintTop_toBottomOf="@id/linear_buttons"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:id="@+id/fragment"
+
+            />
+
+        <ImageButton
+            android:id="@+id/btn_newItem"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="30dp"
+            android:layout_marginRight="20dp"
+
+            android:background="@drawable/rounded_button"
+            android:src="@drawable/plus"
+            android:scaleType="fitXY"
+            android:onClick="onClick_newPostIts"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/popup_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#87433F3F"
+        >
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/fragment_popup"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintWidth_percent="0.8"
+            app:layout_constraintHeight_percent="0.9"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/second_page"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Post-its</string>
+    <string name="str_all">All</string>
+    <string name="str_tags">Tags</string>
+    <integer name="test_padding_v">15</integer>
+    <integer name="test_padding_h">10</integer>
+<!--    <string name="str_hint_item_title">Title</string>-->
+<!--    <string name="str_hint_item_title">Title</string>-->
+<!--    <string name="str_hint_item_title">Title</string>-->
 </resources>
